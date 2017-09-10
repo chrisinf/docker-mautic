@@ -3,6 +3,7 @@ set -e
 
 LATEST_URL="$LATEST_URL"
 PACKAGES_BASE_URL="$PACKAGES_BASE_URL"
+current="$MAUTIC_VERSION"
 
 if [ -z "$LATEST_URL" ]; then
 	echo "LATEST_URL must be defined" >&2
@@ -14,7 +15,15 @@ if [ -z "$PACKAGES_BASE_URL" ]; then
 	exit 1
 fi
 
-current="$(curl "$LATEST_URL")"
+if [ -z "$current" ]; then
+	current="$(curl "$LATEST_URL")"
+fi
+
+if [ -z "$current" ]; then
+	echo "unable to determine version for build" >&2
+	exit 1
+fi
+
 sha1=$(curl "$PACKAGES_BASE_URL/$current.sha1.txt")
 
 if [ -z "$sha1" ]; then
