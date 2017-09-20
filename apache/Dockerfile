@@ -42,5 +42,13 @@ COPY mautic-php.ini /usr/local/etc/php/conf.d/mautic-php.ini
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
 
+# limit apache to 1 worker
+RUN sed -ri ' \
+		s/(StartServers)\s*[0-9]*/\1 1/; \
+		s/(MinSpareServers)\s*[0-9]*/\1 1/; \
+		s/(MaxSpareServers)\s*[0-9]*/\1 1/; \
+		s/(MaxRequestsPerChild)\s*[0-9]*/\1 1/; \
+	' /etc/apache2/mods-enabled/mpm_prefork.conf
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
