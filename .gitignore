@@ -1,0 +1,12 @@
+
+# exclude the common files that are copied at build time
+apache/docker-entrypoint.sh
+apache/makeconfig.php
+apache/makedb.php
+apache/mautic-php.ini
+apache/mautic.crontab
+fpm/docker-entrypoint.sh
+fpm/makeconfig.php
+fpm/makedb.php
+fpm/mautic-php.ini
+fpm/mautic.crontab
