@@ -72,7 +72,7 @@ if [[ "$MAUTIC_RUN_CRON_JOBS" == "true" ]]; then
     fi
     (tail -f /var/log/cron.pipe | while read line; do echo "[CRON] $line"; done) &
     CRONLOGPID=$!
-    cron -f &
+    cron -f -L 5 &
     CRONPID=$!
 else
     echo >&2 "Not running cron as requested."
