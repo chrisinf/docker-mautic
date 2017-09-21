@@ -42,6 +42,8 @@ COPY mautic-php.ini /usr/local/etc/php/conf.d/mautic-php.ini
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
 
+RUN sed -i 's/^\s*session\s\+required\s\+pam_loginuid.so/# &/' /etc/pam.d/cron
+
 # limit apache to 1 worker
 RUN sed -ri ' \
 		s/(StartServers)\s*[0-9]*/\1 1/; \
