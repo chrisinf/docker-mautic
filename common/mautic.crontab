@@ -5,7 +5,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 5,35 * *  * *     www-data   sleep $[($RANDOM \% 900) + 1]s && php /var/www/html/app/console mautic:campaigns:rebuild > /var/log/cron.pipe 2>&1
 2,32 * *  * *     www-data   sleep $[($RANDOM \% 900) + 1]s && php /var/www/html/app/console mautic:campaigns:trigger > /var/log/cron.pipe 2>&1
 0,30 * *  * *     www-data   sleep $[($RANDOM \% 900) + 1]s && php /var/www/html/app/console mautic:messages:send > /var/log/cron.pipe 2>&1
- */2 15-18 *  * 1-5     www-data   sleep $[($RANDOM \% 50) + 1]s && php /var/www/html/app/console mautic:emails:send > /var/log/cron.pipe 2>&1
+*/5 15-20 * * 1-5 www-data   sleep $[($RANDOM \% 120) + 1]s && php /var/www/html/app/console mautic:emails:send > /var/log/cron.pipe 2>&1
 0,30 * *  * *     www-data   sleep $[($RANDOM \% 900) + 1]s && php /var/www/html/app/console mautic:email:fetch > /var/log/cron.pipe 2>&1
 0,30 * *  * *     www-data   sleep $[($RANDOM \% 900) + 1]s && php /var/www/html/app/console mautic:social:monitoring > /var/log/cron.pipe 2>&1
 0,30 * *  * *     www-data   sleep $[($RANDOM \% 900) + 1]s && php /var/www/html/app/console mautic:webhooks:process > /var/log/cron.pipe 2>&1
