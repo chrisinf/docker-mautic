@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libkrb5-dev \
     libmcrypt-dev \
     libssl-dev \
+    libzip-dev \
     unzip \
     zip \
     && rm /etc/cron.daily/*
