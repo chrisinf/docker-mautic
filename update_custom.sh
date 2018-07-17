@@ -16,7 +16,7 @@ if [ -z "$PACKAGES_BASE_URL" ]; then
 fi
 
 if [ -z "$current" ]; then
-	current="$(curl "$LATEST_URL")"
+	current="$(curl -q -O- "$LATEST_URL")"
 fi
 
 if [ -z "$current" ]; then
@@ -24,7 +24,7 @@ if [ -z "$current" ]; then
 	exit 1
 fi
 
-sha1=$(curl "$PACKAGES_BASE_URL/$current.sha1.txt")
+sha1=$(curl -q -O- "$PACKAGES_BASE_URL/$current.sha1.txt")
 
 if [ -z "$sha1" ]; then
 	wget -O mautic.zip "$PACKAGES_BASE_URL/$current.zip"
