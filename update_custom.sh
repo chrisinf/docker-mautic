@@ -16,7 +16,7 @@ if [ -z "$PACKAGES_BASE_URL" ]; then
 fi
 
 if [ -z "$current" ]; then
-	current="$(curl -q -O- "$LATEST_URL")"
+	current="$(curl -q "$LATEST_URL")"
 fi
 
 if [ -z "$current" ]; then
