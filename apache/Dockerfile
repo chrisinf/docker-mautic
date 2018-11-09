@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm /etc/cron.daily/*
 RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install imap intl mbstring mcrypt mysqli pdo pdo_mysql zip
+# Enable opcache in php
+RUN echo "opcache.enable=1" > /usr/local/etc/php/conf.d/mautic-php.ini \
+    && echo "zend_extension=opcache.so" > /usr/local/etc/php/conf.d/mautic-php.ini
 
 VOLUME /var/www/html
 
