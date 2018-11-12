@@ -16,10 +16,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install imap intl mbstring mcrypt mysqli pdo pdo_mysql zip
 
-# Enable opcache in php
-RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/mautic-php.ini
-RUN echo "zend_extension=opcache.so" >> /usr/local/etc/php/conf.d/mautic-php.ini
-
 VOLUME /var/www/html
 
 # Define Mautic version and expected SHA1 signature
@@ -44,6 +40,11 @@ COPY makeconfig.php /makeconfig.php
 COPY makedb.php /makedb.php
 COPY mautic.crontab /etc/cron.d/mautic
 COPY mautic-php.ini /usr/local/etc/php/conf.d/mautic-php.ini
+
+# Enable opcache in php
+RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/mautic-php.ini
+RUN echo "zend_extension=opcache.so" >> /usr/local/etc/php/conf.d/mautic-php.ini
+
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
 
